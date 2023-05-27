@@ -1,16 +1,37 @@
-# This is a sample Python script.
+import pandas as pd
+import json
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Load the pull requests from the JSON file
+with open('pull_requests.json', 'r') as file:
+    pull_requests = [json.loads(line) for line in file]
 
+# Create a DataFrame from the pull request data
+df = pd.DataFrame(pull_requests)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Calculate code churn metrics
+total_lines_added = df['data'].apply(lambda x: x['additions']).sum()
+total_lines_deleted = df['data'].apply(lambda x: x['deletions']).sum()
+net_lines_changed = total_lines_added - total_lines_deleted
 
+print("Total lines added:", total_lines_added)
+print("Total lines deleted:", total_lines_deleted)
+print("Net lines changed (added - deleted):", net_lines_changed)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Example analysis: Count the number of pull requests
+total_pull_requests = len(df)
+print("Total number of pull requests:", total_pull_requests)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Example analysis: Print details of each pull request
+for idx, row in df.iterrows():
+    pr_number = row['data']['number']
+    pr_title = row['data']['title']
+    pr_author = row['data']['user']['login']
+    print("Pull Request #{}: {} (by {})".format(pr_number, pr_title, pr_author))
+
+# Example analysis: Calculate average number of comments per pull request
+average_comments = df['data'].apply(lambda x: x['comments']).mean()
+print("Average number of comments per pull request:", average_comments)
+
+# Perform additional data analysis or calculations as needed
+# ...
+

@@ -80,7 +80,7 @@ def total_issues_plot():
     dates, issue_counts = zip(*sorted_dates)
 
     # Plot the data
-    plt.figure(figsize=(10,5))
+    plt.figure(figsize=(10, 5))
     plt.plot(dates, issue_counts)
     plt.title('Number of Issues Created Over Time')
     plt.xlabel('Date')
@@ -89,9 +89,8 @@ def total_issues_plot():
     plt.show()
 
 
-#pie chart of issues open and closed
+# pie chart of issues open and closed
 def open_close_issues():
-
     # Load JSON data from file
     issues_by_state = {"open": 0, "closed": 0}
 
@@ -123,17 +122,17 @@ def open_close_issues():
     plt.show()
 
 
-#prints bar chart depending on the filter type of the issue
+# prints bar chart depending on the filter type of the issue
 
-#comp:tensorboard: This label indicates that the issue or pull request is related to TensorBoard, a suite of visualization tools provided with TensorFlow. "Comp" likely stands for "component".
+# comp:tensorboard: This label indicates that the issue or pull request is related to TensorBoard, a suite of visualization tools provided with TensorFlow. "Comp" likely stands for "component".
 
-#type:#docs-bug: #This label denotes that the issue is related to a bug in the projects documentation.
+# type:#docs-bug: #This label denotes that the issue is related to a bug in the projects documentation.
 
-#cla: yes: The "cla" stands for Contributor License Agreement. The "yes" indicates that the contributor has signed the CLA, which is usually a requirement for contributing to open source projects. This helps ensure that the project has the right to use their contribution.
+# cla: yes: The "cla" stands for Contributor License Agreement. The "yes" indicates that the contributor has signed the CLA, which is usually a requirement for contributing to open source projects. This helps ensure that the project has the right to use their contribution.
 
-#cla: no: Conversely, this label means that the contributor has not yet signed the CLA, and their contribution cannot be accepted until they do.
+# cla: no: Conversely, this label means that the contributor has not yet signed the CLA, and their contribution cannot be accepted until they do.
 
-#stat:contribution welcome: This label is an invitation for contributors, indicating that help from the community on this issue would be appreciated. "Stat" is likely short for "status".
+# stat:contribution welcome: This label is an invitation for contributors, indicating that help from the community on this issue would be appreciated. "Stat" is likely short for "status".
 def issue_type():
     # Load JSON data from file
     issues_by_label = defaultdict(int)
@@ -170,3 +169,5 @@ def issue_type():
     plt.xticks(rotation=90)  # Rotate x-axis labels for readability
     plt.tight_layout()
     plt.show()
+
+issue_type()
